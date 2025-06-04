@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block content %}
+
+
+    <h1>Index</h1>
+
+    {% if user.is_authenticated %}
+        {{ user }}
+        {% else %}
+        вход
+       
+
+
+        {% endif %}
+
+
+{% endblock content %}
