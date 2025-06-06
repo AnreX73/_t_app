@@ -10,7 +10,7 @@
     {% if user.is_authenticated %}
         {{ user }}
         {% else %}
-        вход
+    <button class="btn" onclick="location.href='{% url 'login' %}'" >вход</button>
        
 
 

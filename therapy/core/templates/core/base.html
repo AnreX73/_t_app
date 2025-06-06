@@ -1,13 +1,21 @@
-<!DOCTYPE html>
+{% load static %}
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'core/css/main.css' %}" />
 </head>
 <body>
+
 {% block content %}
 
 
 {% endblock content %}
+{% if user.is_authenticated %}
+<button class="btn" onclick="location.href='{% url 'logout' %}'" >выйти</button>
+
+{% endif %}
 </body>
 </html>
