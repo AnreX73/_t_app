@@ -3,12 +3,22 @@
 
 {% block content %}
 
-    <h1>Registration</h1>
+    <h1>Регистрация</h1>
 
 <form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="form_error">{{ form.non_field_errors }}</div>
+    <div class="form_container">
+    {% for field in form %}
+    <div class="form_field">
+        <label class="form_label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+        {{ field }}
+        <div class="form_error">{{ field.errors }}</div>
+    </div>
+    {% endfor %}
+    </div>
+    <button class="btn" type="submit">Регистрация</button>
 </form>
 
 {% endblock content %}

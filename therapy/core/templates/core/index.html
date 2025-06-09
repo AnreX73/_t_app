@@ -5,16 +5,15 @@
 {% block content %}
 
 
-    <h1>Index</h1>
+    <h1>Главная страница</h1>
 
     {% if user.is_authenticated %}
         {{ user }}
-        {% else %}
+    {% else %}
     <button class="btn" onclick="location.href='{% url 'login' %}'" >вход</button>
-       
-
-
-        {% endif %}
+    {% endif %}
+<p class="forgot_password" onclick="location.href='{% url 'register' %}'">не зарегестрированы ?</p>
+<p class="forgot_password">забыли пароль ?</p>
 
 
 {% endblock content %}
