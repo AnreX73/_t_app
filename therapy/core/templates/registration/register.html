@@ -11,9 +11,12 @@
     <div class="form_error">{{ form.non_field_errors }}</div>
     <div class="form_container">
     {% for field in form %}
-    <div class="form_field">
-        <label class="form_label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+    <div class="group">
+        
         {{ field }}
+        <span class="highlight"></span>
+      <span class="bar"></span>
+      <label  for="{{ field.id_for_label }}">{{ field.label }}:</label>
         <div class="form_error">{{ field.errors }}</div>
     </div>
     {% endfor %}

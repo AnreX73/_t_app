@@ -6,11 +6,11 @@ User = get_user_model()
 
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(max_length=150, required=True, help_text='или email',
-                               widget=forms.TextInput(attrs={'class': 'form_control', 'placeholder': 'Username'}))
+    username = forms.CharField(max_length=150, required=True,
+                       label='Имя пользователя или email',)
 
-    password = forms.CharField(required=True,
-                               widget=forms.PasswordInput(attrs={'class': 'form_control', 'placeholder': 'Password'}))
+    password = forms.CharField(required=True,label='Пароль',
+                               widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -18,23 +18,28 @@ class LoginUserForm(AuthenticationForm):
 
 
 class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(max_length=150, required=True,
-                               widget=forms.TextInput(attrs={'class': 'form_control', 'placeholder': 'Username'}))
+    username = forms.CharField(max_length=150, required=True,label='Имя пользователя ',)
 
     email = forms.EmailField(required=True,
-                             widget=forms.EmailInput(attrs={'class': 'form_control', 'placeholder': 'Email'}))
+                            label='Email' )
 
     first_name = forms.CharField(required=True,
-                                 widget=forms.TextInput(attrs={'class': 'form_control', 'placeholder': 'First name'}))
+                                 label='Имя')
 
     last_name = forms.CharField(required=True,
-                                widget=forms.TextInput(attrs={'class': 'form_control', 'placeholder': 'Last name'}))
+                                label='Фамилия')
+
+    phone = forms.CharField(required=True,
+                            label='Телефон')
+    
     password1 = forms.CharField(required=True,
-                                widget=forms.PasswordInput(attrs={'class': 'form_control', 'placeholder': 'Password'}))
+                                label='Пароль',
+                                widget=forms.PasswordInput)
 
     password2 = forms.CharField(required=True,
-                                widget=forms.PasswordInput(attrs={'class': 'form_control', 'placeholder': 'Password'}))
+                                label='Повторите пароль',
+                                widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name','phone','photo', 'password1', 'password2')
