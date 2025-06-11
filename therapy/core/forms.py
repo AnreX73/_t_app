@@ -7,9 +7,10 @@ User = get_user_model()
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(max_length=150, required=True,
-                       label='Имя пользователя или email',)
+                               label='Имя пользователя или email',
+                               widget=forms.TextInput(attrs={'readonly onfocus': "this.removeAttribute('readonly');", 'autocomplete': 'off'}))
 
-    password = forms.CharField(required=True,label='Пароль',
+    password = forms.CharField(required=True, label='Пароль',
                                widget=forms.PasswordInput)
 
     class Meta:
@@ -18,10 +19,11 @@ class LoginUserForm(AuthenticationForm):
 
 
 class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(max_length=150, required=True,label='Имя пользователя ',)
+    username = forms.CharField(max_length=150, required=True, label='Имя пользователя ',
+                               widget=forms.TextInput(attrs={'readonly onfocus': "this.removeAttribute('readonly');", 'autocomplete': 'off'}))
 
     email = forms.EmailField(required=True,
-                            label='Email' )
+                             label='Email')
 
     first_name = forms.CharField(required=True,
                                  label='Имя')
@@ -31,7 +33,7 @@ class RegisterUserForm(UserCreationForm):
 
     phone = forms.CharField(required=True,
                             label='Телефон')
-    
+
     password1 = forms.CharField(required=True,
                                 label='Пароль',
                                 widget=forms.PasswordInput)
@@ -42,4 +44,4 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name','phone','photo', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name', 'phone', 'photo', 'password1', 'password2')
