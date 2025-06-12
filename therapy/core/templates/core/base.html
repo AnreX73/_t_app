@@ -8,7 +8,9 @@
     <link type="text/css" rel="stylesheet" href="{% static 'core/css/main.css' %}" />
 </head>
 <body>
-
+{% if user.role == 1 %}
+{% include 'core/include/navbar.html' %}
+{% endif %}
 {% block content %}
 
 

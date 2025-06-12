@@ -5,10 +5,19 @@
 
     <h1>Ваша страница</h1>
 <p>{{user}}</p>
+<p>{{user.role}}</p>
 {% if user.photo %}
         <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">
         
-{% endif %} 
+{% endif %}
+
+{% if user.role == 1 %}
+{% for u in users %}
+<p></p>
+<p>{{u.first_name}} {{ u.last_name}}</p>
+{% endfor %}
+
+{% endif %}
 
 
 {% endblock content %}

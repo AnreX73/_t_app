@@ -7,6 +7,7 @@ from django.views import View
 from django.views.generic import CreateView, DetailView
 
 from .forms import LoginUserForm, RegisterUserForm
+from .models import User
 
 
 def index(request):
@@ -25,9 +26,11 @@ class LoginUser(LoginView):
 @login_required(login_url="/register/")
 def profile(request):
     user = request.user
+    users = User.objects.all()
     context = {
         "user": user,
         "title": "Profile",
+        "users": users
     }
     return render(request, "registration/profile.html", context=context)
 
