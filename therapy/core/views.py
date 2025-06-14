@@ -26,13 +26,23 @@ class LoginUser(LoginView):
 @login_required(login_url="/register/")
 def profile(request):
     user = request.user
-    users = User.objects.all()
-    context = {
-        "user": user,
-        "title": "Profile",
-        "users": users
-    }
-    return render(request, "registration/profile.html", context=context)
+    if user.role == 1:
+        users = User.objects.all()
+        context = {
+            "user": user,
+            "title": "Profile",
+            "users": users
+        }
+
+        return render(request, "registration/admin_profile.html", context=context)
+    else:
+        context = {
+            "user": user,
+            "title": "Profile",
+        }
+
+        return render(request, "registration/profile.html", context=context)
+
 
 
 class RegisterUser(View):
