@@ -44,13 +44,13 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-input,
+.my_input,
 button,
 textarea {
   font-family: inherit;
 }
 
-input::-ms-clear {
+.my_input::-ms-clear {
   display: none;
 }
 
@@ -156,7 +156,7 @@ font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
 	color: #0099CC;
 	background: #F2F2F2;
 }
-#menu input {
+#menu .my_input {
 	display: none;
 	margin: 0;
 	padding: 0;
@@ -209,11 +209,11 @@ font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
 	#menu ul.sub-menus {width:100%;position:static;}
 	#menu ul.sub-menus a {padding-left:30px;}
 	#menu li {display:block;float:none;width:auto;}
-	#menu input, #menu label {position:absolute;top:0;left:0;display:block}
-	#menu input {z-index:4}
-	#menu input:checked + label {color:#FFFFFF}
-	#menu input:checked + label:before {content:"\00d7"}
-	#menu input:checked ~ ul {display:block}
+	#menu .my_input, #menu label {position:absolute;top:0;left:0;display:block}
+	#menu .my_input {z-index:4}
+	#menu .my_input:checked + label {color:#FFFFFF}
+	#menu .my_input:checked + label:before {content:"\00d7"}
+	#menu .my_input:checked ~ ul {display:block}
 }
 
 
@@ -270,7 +270,7 @@ text-align: center;
   margin-bottom:25px; 
   width: 100%;
 }
-input 				{
+.my_input 				{
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
@@ -278,10 +278,10 @@ input 				{
   border:none;
   border-bottom:1px solid #757575;
 }
-input:focus 		{ outline:none; }
+.my_input:focus 		{ outline:none; }
 
 /* LABEL ======================================= */
-label 				 {
+ label 				 {
   color:#999; 
   font-size:18px;
   font-weight:normal;
@@ -295,7 +295,7 @@ label 				 {
 }
 
 /* active state */
-input:focus ~ label, input:valid ~ label 		{
+.my_input:focus ~ label, .my_input:valid ~ label 		{
   top:-15px;
   font-size:14px;
   color:#5264AE;
@@ -322,7 +322,7 @@ input:focus ~ label, input:valid ~ label 		{
 }
 
 /* active state */
-input:focus ~ .bar:before, input:focus ~ .bar:after {
+.my_input:focus ~ .bar:before, .my_input:focus ~ .bar:after {
   width:50%;
 }
 
@@ -338,7 +338,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 }
 
 /* active state */
-input:focus ~ .highlight {
+.my_input:focus ~ .highlight {
   -webkit-animation:inputHighlighter 0.3s ease;
   -moz-animation:inputHighlighter 0.3s ease;
   animation:inputHighlighter 0.3s ease;
@@ -356,4 +356,143 @@ input:focus ~ .highlight {
 @keyframes inputHighlighter {
 	from { background:#5264AE; }
   to 	{ width:0; background:transparent; }
+}
+/* Radio
+-------------------------- */
+.control {
+    font-family: arial;
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 5px;
+    padding-top: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+    .control .my_input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
+.control_indicator {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: #e6e6e6;
+    border: 0px solid #000000;
+    border-radius: undefinedpx;
+}
+.control:hover .my_input ~ .control_indicator,
+.control .my_input:focus ~ .control_indicator {
+    background: #cccccc;
+}
+
+.control .my_input:checked ~ .control_indicator {
+    background: #2aa1c0;
+}
+.control:hover .my_input:not([disabled]):checked ~ .control_indicator,
+.control .my_input:checked:focus ~ .control_indicator {
+    background: #2aa1c0;
+}
+.control .my_input:disabled ~ .control_indicator {
+    background: #2aa1c0;
+    opacity: 0.6;
+    pointer-events: none;
+}
+.control_indicator:after {
+    box-sizing: unset;
+    content: '';
+    position: absolute;
+    display: none;
+}
+.control .my_input:checked ~ .control_indicator:after {
+    display: block;
+}
+.control-radio .control_indicator {
+    border-radius: 50%;
+}
+
+.control-radio .control_indicator:after {
+    left: 7px;
+    top: 7px;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: background 250ms;
+}
+.control-radio .my_input:disabled ~ .control_indicator:after {
+    background: #7b7b7b;
+}.control-radio .control_indicator::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-left: -1.3rem;
+    margin-top: -1.3rem;
+    background: #2aa1c0;
+    border-radius: 3rem;
+    opacity: 0.6;
+    z-index: 99999;
+    transform: scale(0);
+}
+@keyframes s-ripple {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    20% {
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.01;
+        transform: scale(1);
+    }
+}
+@keyframes s-ripple-dup {
+   0% {
+       transform: scale(0);
+    }
+   30% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+.control-radio .my_input + .control_indicator::before {
+    animation: s-ripple 250ms ease-out;
+}
+.control-radio .my_input:checked + .control_indicator::before {
+    animation-name: s-ripple-dup;
+}
+/* end Radio
+-------------------------- */
+.radio-group {
+    margin: 15px 0;
+}
+
+.radio-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio-option input[type="radio"] {
+    margin: 0;
 }

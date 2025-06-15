@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends 'core/base.html' %}
 
 
@@ -12,15 +11,6 @@
 
 {% endif %}
 
-
-{% for u in users %}
-{% if u.role != 1 %}
-
-
-
-<p>{{u.first_name}} {{ u.last_name}} <span> - {{u.get_role_display}}</span> </p>
-{% endif %}
-{% endfor %}
 
 
 

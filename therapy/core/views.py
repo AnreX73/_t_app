@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DetailView
 
-from .forms import LoginUserForm, RegisterUserForm
+from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm
 from .models import User
 
 
@@ -35,6 +35,13 @@ def profile(request):
         }
 
         return render(request, "registration/admin_profile.html", context=context)
+    elif user.role == 2:
+        context = {
+            "user": user,
+            "title": "Profile",
+        }
+
+        return render(request, "registration/worker_profile.html", context=context)
     else:
         context = {
             "user": user,
@@ -42,7 +49,6 @@ def profile(request):
         }
 
         return render(request, "registration/profile.html", context=context)
-
 
 
 class RegisterUser(View):
@@ -70,5 +76,7 @@ class RegisterUser(View):
         return render(request, self.template_name, context)
 
 
-
-
+class UserPasswordResetView(PasswordResetView):
+    template_name = 'registration/user_password_reset_form.html'
+    success_url = reverse_lazy('password_reset_done')
+    form_class = UserPasswordResetForm

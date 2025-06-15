@@ -4,12 +4,18 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
+    SEX = (
+        (1, 'Мужской'),
+        (2, 'Женский'),
+    )
+
     class Role(models.IntegerChoices):
         Admin = 1, 'Администратор'
         Worker = 2, 'Специалист'
         Customer = 3, 'Пользователь'
 
     email = models.EmailField(unique=True, verbose_name='email address')
+    sex = models.PositiveSmallIntegerField(choices=SEX, default=1, verbose_name='Пол')
     role = models.PositiveSmallIntegerField(choices=Role.choices, default=Role.Customer, verbose_name='кто по жизни')
     phone = models.CharField(max_length=12, blank=True, null=True, verbose_name='Телефон')
     photo = models.ImageField(upload_to='user.photos', blank=True, null=True, verbose_name='Фото')
