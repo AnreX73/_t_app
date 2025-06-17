@@ -5,12 +5,14 @@
 {% block content %}
 
     <h1>Ваша страница</h1>
-<p>{{user}}<span> - {{user.get_role_display}}</span> </p>
+<p>{{user}} <span> Вы  - {{user.get_role_display}}</span> </p>
 
 {% if user.photo %}
         <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">
 
 {% endif %}
+
+<hr style="margin: 1rem auto; width: 50%; border-bottom: black solid 1px;">
 
 
 {% for u in users %}

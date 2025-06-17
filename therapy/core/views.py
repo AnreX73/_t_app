@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, PasswordResetView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DetailView
 
-from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm
+from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm, UserPasswordResetConfirmForm
 from .models import User
 
 
@@ -62,7 +62,7 @@ class RegisterUser(View):
         return render(request, self.template_name, context)
 
     def post(self, request):
-        form = RegisterUserForm(request.POST)
+        form = RegisterUserForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
@@ -80,3 +80,13 @@ class UserPasswordResetView(PasswordResetView):
     template_name = 'registration/user_password_reset_form.html'
     success_url = reverse_lazy('password_reset_done')
     form_class = UserPasswordResetForm
+
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'registration/user_password_reset_confirm.html'
+    success_url = reverse_lazy('password_reset_complete')
+    form_class = UserPasswordResetConfirmForm 
+
+   
+
+
+     

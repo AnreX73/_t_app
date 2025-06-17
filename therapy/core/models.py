@@ -17,7 +17,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name='email address')
     sex = models.PositiveSmallIntegerField(choices=SEX, default=1, verbose_name='Пол')
     role = models.PositiveSmallIntegerField(choices=Role.choices, default=Role.Customer, verbose_name='кто по жизни')
-    phone = models.CharField(max_length=12, blank=True, null=True, verbose_name='Телефон')
+    phone = models.CharField(max_length=25, blank=True, null=True, verbose_name='Телефон')
     photo = models.ImageField(upload_to='user.photos', blank=True, null=True, verbose_name='Фото')
     registration_date = models.DateField(auto_now_add=True, verbose_name='Дата регистрации')
 

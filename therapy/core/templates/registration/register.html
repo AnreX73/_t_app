@@ -10,7 +10,7 @@
         <div class="form_error">{{ form.non_field_errors }}</div>
         <div class="form_container">
         {% for field in form %}
-            {% if field.name != 'sex' %}
+            {% if field.name != 'sex' and field.name != 'photo' %}
                 <div class="group">
                     {{ field }}
                     <span class="highlight"></span>
@@ -18,7 +18,7 @@
                     <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                     <div class="form_error">{{ field.errors }}</div>
                 </div>
-            {% else %}
+            {% elif field.name == 'sex' %}
                 <div class="radio-group">
                     <label>{{ field.label }}:</label>
                     <div class="radio-options">
@@ -33,6 +33,10 @@
                     </div>
                     <div class="form_error">{{ field.errors }}</div>
                 </div>
+            {% else %}
+            <div class="file_group">
+             {{ field }} 
+             </div>  
             {% endif %}
         {% endfor %}
         </div>
