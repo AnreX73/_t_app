@@ -111,119 +111,183 @@ body {
   font-family: 'Oswald', sans-serif;
   height: auto;
   max-width: 100%;
-  text-align:center;
+  text-align: center;
   padding: 10px;
 }
 
 
 h1 {
-font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+}
+h2 {
+  font-size: clamp(1.3rem, 0.8rem + 1vw, 2rem);
 }
 
 /* navbar
 -------------------------- */
 #menu {
-	background: #098BCC;
-	height: 45px;
-	border-radius: 4px;
-	margin-bottom: 1rem;
+  background: #098BCC;
+  height: 45px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
-#menu ul, #menu li {
-	margin: 0 auto;
-	padding: 0;
-	list-style: none
-}
-#menu ul {
-	width: 100%;
-	text-align: center;
-}
+
+#menu ul,
 #menu li {
-	display: inline-block;
-	position: relative;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none
 }
+
+#menu ul {
+  width: 100%;
+  text-align: center;
+}
+
+#menu li {
+  display: inline-block;
+  position: relative;
+}
+
 #menu a {
-	display: block;
-	line-height: 45px;
-	padding: 0 14px;
-	text-decoration: none;
-	color: #FFFFFF;
+  display: block;
+  line-height: 45px;
+  padding: 0 14px;
+  text-decoration: none;
+  color: #FFFFFF;
 
 }
+
 #menu a.dropdown-arrow:after {
-	content: "\25BE";
-	margin-left: 5px;
+  content: "\25BE";
+  margin-left: 5px;
 }
+
 #menu li a:hover {
-	color: #0099CC;
-	background: #F2F2F2;
+  color: #0099CC;
+  background: #F2F2F2;
 }
+
 #menu .my_input {
-	display: none;
-	margin: 0;
-	padding: 0;
-	height: 45px;
-	width: 100%;
-	opacity: 0;
-	cursor: pointer
+  display: none;
+  margin: 0;
+  padding: 0;
+  height: 45px;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer
 }
+
 #menu label {
-	display: none;
-	line-height: 45px;
-	text-align: center;
-	position: absolute;
-	left: 35px
+  display: none;
+  line-height: 45px;
+  text-align: center;
+  position: absolute;
+  left: 35px
 }
+
 #menu label:before {
-	font-size: 1.6em;
-	color: #FFFFFF;
-	content: "\2261";
-	margin-left: 20px;
+  font-size: 1.6em;
+  color: #FFFFFF;
+  content: "\2261";
+  margin-left: 20px;
 }
-#menu ul.sub-menus{
-	height: auto;
-	overflow: hidden;
-	width: 170px;
-	background: #444444;
-	position: absolute;
-	z-index: 99;
-	display: none;
+
+#menu ul.sub-menus {
+  height: auto;
+  overflow: hidden;
+  width: 170px;
+  background: #444444;
+  position: absolute;
+  z-index: 99;
+  display: none;
 }
+
 #menu ul.sub-menus li {
-	display: block;
-	text-align: left;
-	width: 100%;
+  display: block;
+  text-align: left;
+  width: 100%;
 }
+
 #menu ul.sub-menus a {
-	color: #FFFFFF;
-	font-size: 16px;
+  color: #FFFFFF;
+  font-size: 16px;
 }
+
 #menu li:hover ul.sub-menus {
-	display: block
+  display: block
 }
-#menu ul.sub-menus a:hover{
-	background: #F2F2F2;
-	color: #444444;
+
+#menu ul.sub-menus a:hover {
+  background: #F2F2F2;
+  color: #444444;
 }
-@media screen and (max-width: 800px){
-	#menu {position:relative}
-	#menu ul {background:#444444;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none;text-align:left;}
-	#menu ul.sub-menus {width:100%;position:static;}
-	#menu ul.sub-menus a {padding-left:30px;}
-	#menu li {display:block;float:none;width:auto;}
-	#menu .my_input, #menu label {position:absolute;top:0;left:0;display:block}
-	#menu .my_input {z-index:4}
-	#menu .my_input:checked + label {color:#FFFFFF}
-	#menu .my_input:checked + label:before {content:"\00d7"}
-	#menu .my_input:checked ~ ul {display:block}
+
+@media screen and (max-width: 800px) {
+  #menu {
+    position: relative
+  }
+
+  #menu ul {
+    background: #444444;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    height: auto;
+    display: none;
+    text-align: left;
+  }
+
+  #menu ul.sub-menus {
+    width: 100%;
+    position: static;
+  }
+
+  #menu ul.sub-menus a {
+    padding-left: 30px;
+  }
+
+  #menu li {
+    display: block;
+    float: none;
+    width: auto;
+  }
+
+  #menu .my_input,
+  #menu label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block
+  }
+
+  #menu .my_input {
+    z-index: 4
+  }
+
+  #menu .my_input:checked+label {
+    color: #FFFFFF
+  }
+
+  #menu .my_input:checked+label:before {
+    content: "\00d7"
+  }
+
+  #menu .my_input:checked~ul {
+    display: block
+  }
 }
+
 /* end navbar
 -------------------------- */
 
 
 .btn {
-  margin-inline:auto;
-  width:150px;
-  margin-top:0.5rem;
+  margin-inline: auto;
+  width: 150px;
+  margin-top: 0.5rem;
   font-family: arial;
   color: white !important;
   font-size: 14px;
@@ -235,129 +299,116 @@ font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
   border-radius: 10px;
   border: 2px solid #3866A3;
   background: #63B8EE;
-  background: linear-gradient(top,  #63B8EE,  #468CCF);
-  background: -ms-linear-gradient(top,  #63B8EE,  #468CCF);
+  background: linear-gradient(top, #63B8EE, #468CCF);
+  background: -ms-linear-gradient(top, #63B8EE, #468CCF);
   background: -webkit-gradient(linear, left top, left bottom, from(#63B8EE), to(#468CCF));
-  background: -moz-linear-gradient(top,  #63B8EE,  #468CCF);
+  background: -moz-linear-gradient(top, #63B8EE, #468CCF);
 }
+
 .btn:hover {
   color: #14396A !important;
   background: grad;
-  background: linear-gradient(top,  #468CCF,  #63B8EE);
-  background: -ms-linear-gradient(top,  #468CCF,  #63B8EE);
+  background: linear-gradient(top, #468CCF, #63B8EE);
+  background: -ms-linear-gradient(top, #468CCF, #63B8EE);
   background: -webkit-gradient(linear, left top, left bottom, from(#468CCF), to(#63B8EE));
-  background: -moz-linear-gradient(top,  #468CCF,  #63B8EE);
+  background: -moz-linear-gradient(top, #468CCF, #63B8EE);
 }
 
 
 
-.forgot_password{
-text-decoration:underline;
-padding:1rem;
-cursor:pointer;
-color:rgb(94, 93, 93);
+.forgot_password {
+  text-decoration: underline;
+  padding: 1rem;
+  cursor: pointer;
+  color: rgb(94, 93, 93);
 }
 
-.form_container{
-margin-top: 1.5rem;
-margin-inline: auto;
-width: clamp(300px, 30%, 500px);
-text-align: center;
+.form_container {
+  margin-top: 1.5rem;
+  margin-inline: auto;
+  width: clamp(300px, 30%, 500px);
+  text-align: center;
 }
 
 /* input text
 -------------------------- */
-.group 			  { 
-  position:relative; 
-  margin-bottom:25px; 
+.group {
+  position: relative;
+  margin-bottom: 25px;
   width: 100%;
 }
-input[type="text"], input[type="password"] 					{
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-  width:clamp(240px, 100%, 500px);
-  border:none;
-  border-bottom:1px solid #757575;
+
+input[type="text"],
+input[type="password"] {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: clamp(240px, 100%, 500px);
+  border: none;
+  border-bottom: 1px solid #757575;
 }
 
 /* LABEL ======================================= */
- input[type="text"] ~ label, input[type="password"] ~ label 				 {
-  color:#999; 
-  font-size:18px;
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left:5px;
-  top:10px;
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
+input[type="text"]~label,
+input[type="password"]~label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
 }
 
 /* active state */
-input[type="text"]:focus ~ label, input[type="text"]:valid ~ label, input[type="password"]:focus ~ label , input[type="password"]:valid ~ label		{
-  top:-15px;
-  font-size:14px;
-  color:#5264AE;
+input[type="text"]:focus~label,
+input[type="password"]:focus~label,
+input[type="password"]:valid~label {
+  top: -15px;
+  font-size: 14px;
+  color: #5264AE;
 }
 
 /* BOTTOM BARS ================================= */
-.bar 	{ position:relative; display:block; width:100%; }
-.bar:before, .bar:after 	{
-  content:'';
-  height:2px; 
-  width:0;
-  bottom:1px; 
-  position:absolute;
-  background:#5264AE; 
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
 }
-.bar:before {
-  left:50%;
-}
+
+.bar:before,
 .bar:after {
-  right:50%; 
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+  left: 50%;
+}
+
+.bar:after {
+  right: 50%;
 }
 
 /* active state */
-input[type="text"]:focus ~ .bar:before, input[type="text"]:focus ~ .bar:after, input[type="text"]:valid ~ .bar:before, input[type="text"]:valid ~ .bar:after, input[type="password"]:focus ~ .bar:before, input[type="password"]:focus ~ .bar:after {
-  width:50%;
+input[type="text"]:focus~.bar:before,
+input[type="text"]:focus~.bar:after,
+
+input[type="password"]:focus~.bar:before,
+input[type="password"]:focus~.bar:after {
+  width: 50%;
 }
 
-/* HIGHLIGHTER ================================== */
-.highlight {
-  position:absolute;
-  height:60%; 
-  width:100px; 
-  top:25%; 
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
-}
-
-/* active state */
-input[type="text"]:focus ~ .highlight, input[type="password"]:focus ~ .highlight {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
 /* end input text
 -------------------------- */
 
@@ -366,55 +417,57 @@ input[type="text"]:focus ~ .highlight, input[type="password"]:focus ~ .highlight
 /* Radio
 -------------------------- */
 .radio-group {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    text-align: left;
-    margin: 15px 0;
-    color: #999;
-    font-size: 18px;
-    padding:10px 10px 10px 5px;
-    border-bottom:1px solid #757575;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  text-align: left;
+  margin: 15px 0;
+  color: #999;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  border-bottom: 1px solid #757575;
 }
 
 .radio-options {
-    display: flex;
-    gap: 15px;
-    margin-top: 5px;
+  display: flex;
+  gap: 15px;
+  margin-top: 5px;
 }
 
 .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .radio-option input[type="radio"] {
-    margin: 0;
+  margin: 0;
 }
 
-input[type="radio"]  {
-    cursor: pointer;
-    
+input[type="radio"] {
+  cursor: pointer;
+
 }
+
 /* end Radio
 -------------------------- */
 
 
 /* input file
 -------------------------- */
-.file_group{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    text-align: left;
-    margin: 15px 0;
-    color: #999;
-    font-size: 18px;
-    padding:10px 10px 10px 5px;
-    border-bottom:1px solid #757575;
-    gap:1.5rem;
+.file_group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  text-align: left;
+  margin: 15px 0;
+  color: #999;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  border-bottom: 1px solid #757575;
+  gap: 1.5rem;
 }
+
 /* input[type="file"] ~ label {
   cursor: pointer;
   margin-inline:auto;
