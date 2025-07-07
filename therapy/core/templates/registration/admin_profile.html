@@ -20,7 +20,7 @@
 
 
 
-<p>{{u.first_name}} {{ u.last_name}} <span> - {{u.get_role_display}}</span> </p>
+<a href="{% url 'user_profile' u.pk %}"><p>{{u.first_name}} {{ u.last_name}} <span> - {{u.get_role_display}}</span> </p></a>
 
 {% endif %}
 {% endfor %}

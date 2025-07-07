@@ -11,7 +11,11 @@
         
 {% endif %}
 
+{% if user.is_authenticated %}
+<button class="btn" onclick="location.href='{% url 'logout' %}'" >выйти</button>
 
+
+{% endif %}
 
 
 {% endblock content %}

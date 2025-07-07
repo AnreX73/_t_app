@@ -1,10 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, DetailView
+from django.core.exceptions import PermissionDenied
+
+
 
 from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm, UserPasswordResetConfirmForm
 from .models import User
@@ -88,5 +90,15 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
 
    
 
+
+@login_required
+def user_profile(request, pk):
+    profile_user = get_object_or_404(User, pk=pk)
+    
+    
+    if request.user.role != User.Role.Admin and request.user != profile_user:
+        raise PermissionDenied("Вы не имеете доступа к этому профилю")
+    
+    return render(request, 'registration/user_profile.html', {'profile_user': profile_user})
 
      
