@@ -6,11 +6,10 @@
     <meta charset="UTF-8">
     <title>{{title}}</title>
     <link type="text/css" rel="stylesheet" href="{% static 'core/css/main.css' %}" />
+    {% block extra_css %}{% endblock extra_css %}
 </head>
 <body>
-{% if user.role == 1 %}
-{% include 'core/include/navbar.html' %}
-{% endif %}
+
 {% block content %}
 
 

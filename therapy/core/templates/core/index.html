@@ -1,11 +1,29 @@
 {% extends 'core/base.html' %}
-
+{% block extra_css %}
+    <!-- Стили только для этой страницы -->
+    
+    <style>
+        .main_page_wrapper{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .logo_box{
+            width: 350px;
+            margin: 0 auto;
+        }
+        .logo_image{
+            width: 50%;
+        }
+    </style>
+{% endblock extra_css %}
 
 
 {% block content %}
 
-
-    <h1>Главная страница</h1>
+<div class="main_page_wrapper">
+    <div class="logo_box"><img class="logo_image" src="{{logo.image.url}}" alt="{{logo.note}}"></div>
 
     {% if user.is_authenticated %}
         {{ user }}
@@ -13,6 +31,6 @@
     <button class="btn" onclick="location.href='{% url 'login' %}'" >вход</button>
     {% endif %}
 
-
+</div>
 
 {% endblock content %}

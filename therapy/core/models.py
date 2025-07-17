@@ -39,6 +39,21 @@ class User(AbstractUser):
         ordering = ["id"]
 
 
+class AdditionalMaterials(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Название")
+    image = models.ImageField(
+        upload_to="additional_materials", blank=True, verbose_name="Изображение"
+    )
+    note = models.TextField(blank=True, verbose_name="Примечание")
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = "Дополнительные материалы"
+        verbose_name_plural = "Дополнительные материалы"
+
+
 class WorkerSchedule(models.Model):
     DAYS_OF_WEEK = [
         ("mon", "Понедельник"),
@@ -64,7 +79,10 @@ class WorkerSchedule(models.Model):
     end_time = models.TimeField(verbose_name="Время окончания")
     appointment_duration = models.PositiveSmallIntegerField(
         verbose_name="Длительность приема",
-        validators=[MinValueValidator(1), MaxValueValidator(120)],  # Продолжительность приема в минутах (от 1 до 120)
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(120),
+        ],  # Продолжительность приема в минутах (от 1 до 120)
     )
 
     def __str__(self):

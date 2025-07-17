@@ -1,3 +1,4 @@
+from tkinter import W
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView
@@ -5,11 +6,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.core.exceptions import PermissionDenied
-
+from django.utils import timezone
+from datetime import timedelta, date
 
 
 from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm, UserPasswordResetConfirmForm
-from .models import User
+from .models import User, WorkerSchedule
 
 
 def index(request):
@@ -29,7 +31,7 @@ class LoginUser(LoginView):
 def profile(request):
     user = request.user
     if user.role == 1:
-        users = User.objects.all()
+        users = User.objects.filter(role=2)
         context = {
             "user": user,
             "title": "Profile",
@@ -102,3 +104,50 @@ def user_profile(request, pk):
     return render(request, 'registration/user_profile.html', {'profile_user': profile_user})
 
      
+def worker_calendar(request, worker_id):
+    # Получаем работника
+    worker = get_object_or_404(User, id=worker_id)
+    
+    # Получаем расписание работника
+    schedules =WorkerSchedule.objects.filter(worker_id=worker_id)
+    # Текущая дата
+    today = timezone.now().date()
+    
+    # Определяем начало и конец текущего месяца
+    start_date = today.replace(day=1)  # Первый день текущего месяца
+    next_month = start_date.replace(day=28) + timedelta(days=4)  # Переход на следующий месяц
+    end_date = next_month - timedelta(days=next_month.day)  # Последний день текущего месяца
+
+    # Создаем календарь
+    calendar = []
+    current_date = start_date
+    while current_date <= end_date:
+        day_info = {
+            "date": current_date,
+            "day_of_week": current_date.strftime("%a").lower(),  # День недели в формате 'mon', 'tue', и т.д.
+            "is_past": current_date < today,  # Прошедшая дата
+            "is_working": False,  # По умолчанию день не рабочий
+            "style": "non-working-day"  # Стиль по умолчанию для нерабочих дней
+        }
+
+        # Проверяем, является ли день рабочим
+        for schedule in schedules:
+            if day_info["day_of_week"] == schedule.day_of_week:
+                day_info["is_working"] = True
+                day_info["style"] = "working-day"
+                break
+
+        # Если день прошедший, меняем стиль
+        if day_info["is_past"]:
+            day_info["style"] = "past-day"
+
+        calendar.append(day_info)
+        current_date += timedelta(days=1)
+
+    # Передаем данные в шаблон
+    context = {
+        "worker": worker,
+        "calendar": calendar,
+        "today": today,
+    }
+    return render(request, 'core/worker_calendar.html', context)

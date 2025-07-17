@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 {% extends 'core/base.html' %}
+{% block extra_css %}
+    <!-- Стили только для этой страницы -->
+    
+    <style>
+        .special_h3 {
+            margin-top: 1rem;
+        }
+    </style>
+{% endblock extra_css %}
 
 
 {% block content %}
 
-    <h1>Ваша страница</h1>
-<p>{{user}} <span> Вы  - {{user.get_role_display}}</span> </p>
+{% include 'core/include/navbar.html' %}
+
+    <h1>Администрирование</h1>
+<h3 class="special_h3">Администратор - {{user}}</h3>
 
 {% if user.photo %}
         <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">

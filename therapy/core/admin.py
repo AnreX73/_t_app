@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import User, WorkerSchedule
+from .models import User, WorkerSchedule, AdditionalMaterials
+from django.utils.safestring import mark_safe
 
 
 @admin.register(User)
@@ -21,8 +22,12 @@ class UserAdmin(admin.ModelAdmin):
         "is_active",
         "registration_date",
     )
-    list_display_links = ('id',"first_name","username",)
-    
+    list_display_links = (
+        "id",
+        "first_name",
+        "username",
+    )
+
     list_filter = (
         "last_login",
         "is_superuser",
@@ -33,6 +38,22 @@ class UserAdmin(admin.ModelAdmin):
     )
     raw_id_fields = ("groups", "user_permissions")
     save_on_top = True
+
+
+@admin.register(AdditionalMaterials)
+class AdditionalMaterialsAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "title",
+        "note",
+        "image_tag",
+    )
+
+    def image_tag(self, obj):
+        return mark_safe(f'<img src="{obj.image.url}" width="100" height="100" />')
+
+    image_tag.short_description = "Image"
+    image_tag.allow_tags = True
 
 
 @admin.register(WorkerSchedule)

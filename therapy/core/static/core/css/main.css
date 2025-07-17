@@ -113,12 +113,14 @@ body {
   max-width: 100%;
   text-align: center;
   padding: 10px;
+  
 }
 
 
 h1 {
   font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
 }
+
 h2 {
   font-size: clamp(1.3rem, 0.8rem + 1vw, 2rem);
 }
@@ -510,4 +512,39 @@ input[type="file"]::file-selector-button {
   cursor: pointer;
   color: #333;
   margin-right: 2rem;
+}
+
+
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.day {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.past-day {
+  background-color: #ccc;
+  /* Серый для прошедших дней */
+  color: #666;
+}
+
+.working-day {
+  background-color: #4CAF50;
+  /* Зеленый для рабочих дней */
+  color: white;
+}
+
+.non-working-day {
+  background-color: #f44336;
+  /* Красный для нерабочих дней */
+  color: white;
 }
