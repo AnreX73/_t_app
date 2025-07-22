@@ -1,6 +1,20 @@
 {% extends 'core/base.html' %}
-
+{% block extra_css %}
+    <!-- Стили только для этой страницы -->
+    
+    <style>
+      
+        .logo_box{
+            width: 240px;
+            margin: 0 auto;
+        }
+        .logo_image{
+            width: 50%;
+        }
+    </style>
+{% endblock extra_css %}
 {% block content %}
+<div class="logo_box"><img class="logo_image" src="{{logo.image.url}}" alt="{{logo.note}}"></div>
     <h2>Вход в профиль</h2>
     <form action="" method="post">
         {% csrf_token %}

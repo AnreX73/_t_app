@@ -2,20 +2,38 @@ from django import template
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from datetime import timedelta
+from datetime import date
 
 from core.models import *
+from core.utils import month_calendar
+
+today = timezone.now().date()
+YEAR = today.year
+MONTH = today.month
+
 
 register = template.Library()
 
 
 @register.inclusion_tag('core/include/worker_calendar.html')
-def worker_calendar(worker_id=None):
+def worker_calendar(worker_id=None, year=YEAR, month=MONTH):
     # Получаем работника
     worker = get_object_or_404(User, id=worker_id)
     # Получаем расписание работника
     schedules =WorkerSchedule.objects.filter(worker_id=worker_id)
-    # Текущая дата
-    today = timezone.now().date()
+    working_week_days =WorkerSchedule.objects.filter(worker_id=worker_id).values_list('day_of_week', flat=True) 
+    actual_calendar = (month_calendar(year,month)) 
+    for day in actual_calendar:
+        if day < today:
+             day_info = {
+            "date": day,
+            "style": "non-working-day"  # Стиль по умолчанию для нерабочих дней
+            }
+        print(day_info)
+        
+        
+       
+         
     
     # Определяем начало и конец текущего месяца
     start_date = today.replace(day=1)  # Первый день текущего месяца
@@ -33,7 +51,7 @@ def worker_calendar(worker_id=None):
             "is_working": False,  # По умолчанию день не рабочий
             "style": "non-working-day"  # Стиль по умолчанию для нерабочих дней
         }
-
+        
         # Проверяем, является ли день рабочим
         for schedule in schedules:
             if day_info["day_of_week"] == schedule.day_of_week:
