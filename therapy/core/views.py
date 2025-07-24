@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
-from datetime import timedelta, date
+from datetime import timedelta
 
 
 from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm, UserPasswordResetConfirmForm

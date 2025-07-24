@@ -531,20 +531,16 @@ input[type="file"]::file-selector-button {
   border-radius: 5px;
 }
 
-.past-day {
-  background-color: #ccc;
-  /* Серый для прошедших дней */
-  color: #666;
-}
+
 
 .working-day {
-  background-color: #4CAF50;
+  background-color: #098BCC;
   /* Зеленый для рабочих дней */
   color: white;
 }
 
 .non-working-day {
-  background-color: #f44336;
+  background-color:rgb(212, 238, 238,0.2);
   /* Красный для нерабочих дней */
-  color: white;
+  color: rgb(0, 0, 0,0.2);
 }

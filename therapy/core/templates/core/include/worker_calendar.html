@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block extra_css %}
+<style>
+hr{
+    margin: 1rem auto;
+    width: 50%;
+    border-bottom: teal dotted 1px;
+}
+</style>
+{% endblock extra_css %}
+
+
+{% block content %}
+
+    <hr>
+
+    <div class="calendar">
+        {% for day in worker_calendar %}
+            <div class="day {{ day.style }}">
+                {{ day.date|date:"d" }}<br> <!-- Отображаем день месяца -->
+                 <!-- Отображаем день недели -->
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock content %}

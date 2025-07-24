@@ -15,8 +15,8 @@
 
 {% include 'core/include/navbar.html' %}
 
-    <h1>Администрирование</h1>
-<h3 class="special_h3">Администратор - {{user}}</h3>
+    <h2>Администрирование</h2>
+<h4 class="special_h3">Администратор - {{user}}</h4>
 
 {% if user.photo %}
         <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">
