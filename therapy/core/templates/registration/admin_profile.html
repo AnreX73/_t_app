@@ -1,11 +1,24 @@
-<!DOCTYPE html>
 {% extends 'core/base.html' %}
+{% load core_tags %}
 {% block extra_css %}
     <!-- Стили только для этой страницы -->
     
     <style>
         .special_h3 {
             margin-top: 1rem;
+        }
+        .wokers_schedule_wrapper {
+            margin: 1rem auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .woker_schedule_wrapper {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
         }
     </style>
 {% endblock extra_css %}
@@ -23,18 +36,21 @@
 
 {% endif %}
 
-<hr style="margin: 1rem auto; width: 50%; border-bottom: black solid 1px;">
 
 
+<div class="wokers_schedule_wrapper">
 {% for u in users %}
 {% if u.role != 1 %}
 
 
-
-<a href="{% url 'user_profile' u.pk %}"><p>{{u.first_name}} {{ u.last_name}} <span> - {{u.get_role_display}}</span> </p></a>
+<div class="woker_schedule_wrapper">
+<p>{{u.first_name}} {{ u.last_name}}  </p>
+{% worker_calendar u.pk %}
+</div>
 
 {% endif %}
 {% endfor %}
+</div>
 
 
 

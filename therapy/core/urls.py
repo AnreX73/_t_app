@@ -9,7 +9,7 @@ from .views import (
     UserPasswordResetView,
     UserPasswordResetConfirmView,
     user_profile,
-    worker_calendar,
+    
 )
 from django.contrib.auth.views import (
     LogoutView,
@@ -20,7 +20,7 @@ from django.contrib.auth.views import (
 
 urlpatterns = [
     path("", index, name="home"),
-    path("worker/<int:worker_id>/calendar/", worker_calendar, name="worker_calendar"),
+    
 ]
 
 

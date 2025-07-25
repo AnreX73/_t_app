@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% load core_tags %}
 
 {% block content %}
 
@@ -10,6 +10,8 @@
         <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">
 
 {% endif %}
+
+{% worker_calendar user.pk %}
 
 {% if user.is_authenticated %}
 <button class="btn" onclick="location.href='{% url 'logout' %}'" >выйти</button>
