@@ -106,8 +106,7 @@ h6 {
 
 body {
   font-size: clamp(0.857rem, 1vw + 1rem, 1.714rem);
-  display: flex;
-  flex-direction: column;
+  
   font-family: 'Oswald', sans-serif;
   height: auto;
   max-width: 100%;
@@ -115,6 +114,16 @@ body {
   padding: 10px;
   
 }
+
+
+.all_content_wrapper{
+  max-width: 1280px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
 
 
 h1 {
@@ -519,7 +528,7 @@ input[type="file"]::file-selector-button {
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 5px;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -529,6 +538,8 @@ input[type="file"]::file-selector-button {
   border: 1px solid #ccc;
   text-align: center;
   border-radius: 5px;
+  font-size: 1.2rem;
+ 
 }
 
 
@@ -537,6 +548,7 @@ input[type="file"]::file-selector-button {
   background-color: #098BCC;
   /* Зеленый для рабочих дней */
   color: white;
+   cursor: pointer;
 }
 
 .non-working-day {

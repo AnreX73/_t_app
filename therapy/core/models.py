@@ -92,3 +92,31 @@ class WorkerSchedule(models.Model):
     class Meta:
         verbose_name = "Расписание специалиста"
         verbose_name_plural = "Расписания специалистов"
+
+
+class Bid(models.Model):
+    WORKER = 'worker'
+    CUSTOMER = 'customer'
+    
+    worker = models.ForeignKey('User', limit_choices_to={'role': User.Role.Worker}, on_delete=models.CASCADE, related_name='worker_bids')
+    customer = models.ForeignKey('User', limit_choices_to={'role': User.Role.Customer}, on_delete=models.CASCADE, related_name='customer_bids')
+    date = models.DateField()
+    time = models.TimeField()
+    note = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки'
+
+class ChildBid(models.Model):
+    bid = models.OneToOneField(Bid, on_delete=models.CASCADE, related_name='child_info')
+    SEX_CHOICES = [
+        ('M', 'Мужской'),
+        ('F', 'Женский')
+    ]
+    sex = models.CharField(max_length=1, choices=SEX_CHOICES)
+    birth_year = models.PositiveSmallIntegerField()
+
+    class Meta:
+        verbose_name = 'Детская заявка'
+        verbose_name_plural = 'Детские заявки'
