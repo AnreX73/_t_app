@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, WorkerSchedule, AdditionalMaterials, Bid, ChildBid
+from .models import User, WorkerSchedule, AdditionalMaterials, AdultBid, ChildBid
 from django.utils.safestring import mark_safe
 
 
@@ -69,22 +69,27 @@ class WorkerScheduleAdmin(admin.ModelAdmin):
     list_filter = ("worker",)
 
 
-@admin.register(Bid)
-class BidAdmin(admin.ModelAdmin):
+@admin.register(AdultBid)
+class AdultBidAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "worker",
         "customer",
         "date",
         "time",
-        "note",
+        "status",
     )
+    list_filter = ("worker","customer")
+
 
 @admin.register(ChildBid)
 class ChildBidAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "bid",
-        "sex",
-        "birth_year",
+        "worker",
+        "customer",
+        "date",
+        "time",
+        "status",
     )
+    list_filter = ("worker", "customer")

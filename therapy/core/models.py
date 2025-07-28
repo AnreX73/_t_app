@@ -85,6 +85,14 @@ class WorkerSchedule(models.Model):
             MaxValueValidator(120),
         ],  # Продолжительность приема в минутах (от 1 до 120)
     )
+    pre_entry_days = models.PositiveSmallIntegerField(
+        default=15,
+        verbose_name="количество дней для предварительной записи",
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(90),
+        ],  # Количество дней предзаписи (от 0 до 30)
+    )
 
     def __str__(self):
         return f"{self.worker} - {self.get_day_of_week_display()}"
@@ -94,29 +102,64 @@ class WorkerSchedule(models.Model):
         verbose_name_plural = "Расписания специалистов"
 
 
-class Bid(models.Model):
-    WORKER = 'worker'
-    CUSTOMER = 'customer'
-    
-    worker = models.ForeignKey('User', limit_choices_to={'role': User.Role.Worker}, on_delete=models.CASCADE, related_name='worker_bids')
-    customer = models.ForeignKey('User', limit_choices_to={'role': User.Role.Customer}, on_delete=models.CASCADE, related_name='customer_bids')
-    date = models.DateField()
-    time = models.TimeField()
-    note = models.TextField(blank=True)
+class BaseBid(models.Model):
+    class BidStatus(models.IntegerChoices):
+        NEW = 1, "Новая"
+        ACCEPTED = 2, "Подтверждена"
+        DECLINED = 3, "Отклонена"
+        DONE = 4, "Завершена"
+
+    worker = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        limit_choices_to={"role": User.Role.Worker},
+        related_name='worker_%(class)s',
+        verbose_name="Специалист",
+    )
+    customer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        limit_choices_to={"role": User.Role.Customer},
+        related_name="customer_%(class)s",
+        verbose_name="Заказчик",
+    )
+    date = models.DateField(verbose_name="Дата")
+    time = models.TimeField(verbose_name="Время")
+    status = models.PositiveSmallIntegerField(
+        choices=BidStatus.choices,
+        default=BidStatus.NEW,
+        verbose_name="Статус заявки",
+    )
+    customer_note = models.TextField(blank=True, verbose_name="Заказчик примечание")
+    admin_note = models.TextField(blank=True, verbose_name="Администратор примечание")
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Заявка'
-        verbose_name_plural = 'Заявки'
+        abstract = True
+        ordering = ['-created_at']
 
-class ChildBid(models.Model):
-    bid = models.OneToOneField(Bid, on_delete=models.CASCADE, related_name='child_info')
-    SEX_CHOICES = [
-        ('M', 'Мужской'),
-        ('F', 'Женский')
-    ]
-    sex = models.CharField(max_length=1, choices=SEX_CHOICES)
+
+class AdultBid(BaseBid):
+    """Заявка для взрослого"""
+
+    class Meta:
+        verbose_name = "Заявка для взрослого"
+        verbose_name_plural = "Заявки для взрослых"
+
+
+class ChildBid(BaseBid):
+    """Заявка для ребенка"""
+
+    class ChildSex(models.IntegerChoices):
+        MALE = 1, "Мужской"
+        FEMALE = 2, "Женский"
+
+    sex = models.PositiveSmallIntegerField(
+        choices=ChildSex.choices,
+        default=ChildSex.MALE
+    )
     birth_year = models.PositiveSmallIntegerField()
 
     class Meta:
-        verbose_name = 'Детская заявка'
-        verbose_name_plural = 'Детские заявки'
+        verbose_name = "Заявка для ребенка"
+        verbose_name_plural = "Заявки для детей"

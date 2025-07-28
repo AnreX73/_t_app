@@ -10,7 +10,7 @@ from django.utils import timezone
 from datetime import timedelta
 
 
-from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm, UserPasswordResetConfirmForm
+from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm, UserPasswordResetConfirmForm, CrateBidForm
 from .models import User, WorkerSchedule
 
 
@@ -104,3 +104,12 @@ def user_profile(request, pk):
     return render(request, 'registration/user_profile.html', {'profile_user': profile_user})
 
      
+
+@login_required
+def create_bid(request):
+    form = CrateBidForm
+    context = {
+        "title": "Создание заявки",
+        "form": form
+    }
+    return render(request, 'core/create_bid.html', context=context)

@@ -1,3 +1,4 @@
+from re import A
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (
@@ -6,6 +7,7 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
+from .models import AdultBid
 
 User = get_user_model()
 
@@ -99,3 +101,10 @@ class UserPasswordResetConfirmForm(SetPasswordForm):
     new_password2 = forms.CharField(
         required=True, label="Повторите пароль", widget=forms.PasswordInput
     )
+
+
+class CrateBidForm(forms.ModelForm):
+    worker = forms.ModelChoiceField(queryset=User.objects.filter(role=User.Role.Worker), label="Специалист", widget=forms.Select(attrs={"class": "custom-select"}))
+    class Meta:
+        model = AdultBid
+        fields = ("worker", "date", "time", "customer_note")

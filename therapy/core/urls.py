@@ -9,6 +9,7 @@ from .views import (
     UserPasswordResetView,
     UserPasswordResetConfirmView,
     user_profile,
+    create_bid,
     
 )
 from django.contrib.auth.views import (
@@ -20,7 +21,7 @@ from django.contrib.auth.views import (
 
 urlpatterns = [
     path("", index, name="home"),
-    
+    path("create_bid/", create_bid, name="create_bid"),
 ]
 
 
