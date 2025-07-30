@@ -1,17 +1,87 @@
 {% extends 'core/base.html' %}
+{% block extra_css %}
+    <!-- Стили только для этой страницы -->
 
+    <style>
+        p{
+            font-size: 1rem;
+        }
+        .user_main_info{
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .logo_box{
+            width: 240px;
+            margin: 0 auto;
+        }
+        .logo_image{
+            width: 50%;
+            
+        }
+        .customer_menu{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+        }
+        .customer_button{
+          display: flex;
+          justify-content: space-between;
+          position: relative;
+          width: 300px;
+          margin-inline: auto;
+          border: 1px dotted #098BCC;
+          border-radius: 4px;
+          padding:0.75rem;
+          font-size: 1.2rem;
+          background-color: #c3eafcff;
+          cursor: pointer;
+        }
+        .customer_info{
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          margin-bottom: 1rem;
+        }
+       .check_offers{
+        position: relative;
+        font-size: 1.2rem;
+       }
+       .check_offers::after{
+        content: "✓";
+        margin-left: 0.5rem;
+        color: green;
+       }
+    </style>
+
+{% endblock extra_css %}
 
 {% block content %}
+<div class="logo_box"><img class="logo_image" src="{{logo.image.url}}" alt="{{logo.note}}"></div>
+    <h2>Ваша страница</h2>
+<div class="user_main_info">
 
-    <h1>Ваша страница</h1>
-<p>{{user}}<span> - {{user.get_role_display}}</span> </p>
 
 {% if user.photo %}
-        <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">
-        
-{% endif %}
+        <img style="max-width: 75px; margin: 0 auto;border-radius: 50%;border: 3px solid #c3eafcff" src="{{user.photo.url}}" alt="{{user.first_name}}">
 
+{% endif %}
+<p>{{user.first_name}}</p>
+</div>
 {% if user.is_authenticated %}
+<div class="customer_menu">
+
+    <div class="customer_button">Мои записи
+        <div class="customer_button_child">0 / 0</div>
+    </div>
+    <div class="customer_button">Заказать абонемент</div>
+    <div class="customer_button">Записаться на занятие</div>
+</div>
+<div class="customer_info">
+<p class="check_offers" >справка</p>
+<p class="check_offers" >договор</p>
+</div>
 <button class="btn" onclick="location.href='{% url 'logout' %}'" >выйти</button>
 
 
