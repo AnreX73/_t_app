@@ -10,6 +10,13 @@
             margin-top: 1rem;
             margin-bottom: 1rem;
         }
+        .user_main_info img{
+            max-width: 75px;
+             margin: 0 auto;
+             border-radius: 50%;
+             border: 5px solid #c3eafcff
+        }
+
         .logo_box{
             width: 240px;
             margin: 0 auto;
@@ -27,16 +34,19 @@
         }
         .customer_button{
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           position: relative;
           width: 300px;
           margin-inline: auto;
-          border: 1px dotted #098BCC;
-          border-radius: 4px;
-          padding:0.75rem;
+          border-radius: 1rem;
+          padding:1rem;
           font-size: 1.2rem;
-          background-color: #c3eafcff;
+          background-color: #f1f1f1ff;
           cursor: pointer;
+        }
+
+        .customer_button:hover{
+          background-color: #e7f7ffff;
         }
         .customer_info{
           display: flex;
@@ -59,12 +69,16 @@
 
 {% block content %}
 <div class="logo_box"><img class="logo_image" src="{{logo.image.url}}" alt="{{logo.note}}"></div>
-    <h2>Ваша страница</h2>
+    
 <div class="user_main_info">
 
 
 {% if user.photo %}
-        <img style="max-width: 75px; margin: 0 auto;border-radius: 50%;border: 3px solid #c3eafcff" src="{{user.photo.url}}" alt="{{user.first_name}}">
+        <img  src="{{user.photo.url}}" alt="{{user.first_name}}">
+{% elif user.sex == 1 %}
+        <img  src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="{{user.first_name}}">
+{% else %}
+        <img  src="https://cdn-icons-png.flaticon.com/512/149/149072.png" alt="{{user.first_name}}">
 
 {% endif %}
 <p>{{user.first_name}}</p>
@@ -73,7 +87,6 @@
 <div class="customer_menu">
 
     <div class="customer_button">Мои записи
-        <div class="customer_button_child">0 / 0</div>
     </div>
     <div class="customer_button">Заказать абонемент</div>
     <div class="customer_button">Записаться на занятие</div>
