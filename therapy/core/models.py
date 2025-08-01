@@ -100,7 +100,23 @@ class WorkerSchedule(models.Model):
     class Meta:
         verbose_name = "Расписание специалиста"
         verbose_name_plural = "Расписания специалистов"
+class Abonements(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Название")
+    bids_count = models.PositiveSmallIntegerField(verbose_name="Количество посещений")
+    price = models.PositiveIntegerField(verbose_name="Цена", default=0)
+    note = models.TextField(blank=True, verbose_name="Примечание")
 
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = "Абонемент"
+        verbose_name_plural = "Абонементы"
+    
+    
+
+    class Meta:
+        verbose_name = "Абонемент"
+        verbose_name_plural = "Абонементы"
 
 class BaseBid(models.Model):
     class BidStatus(models.IntegerChoices):
@@ -123,6 +139,7 @@ class BaseBid(models.Model):
         related_name="customer_%(class)s",
         verbose_name="Заказчик",
     )
+    abonement = models.ForeignKey(Abonements, on_delete=models.CASCADE, default=1, verbose_name="Абонемент")
     date = models.DateField(verbose_name="Дата")
     time = models.TimeField(verbose_name="Время")
     status = models.PositiveSmallIntegerField(
@@ -156,8 +173,10 @@ class ChildBid(BaseBid):
 
     sex = models.PositiveSmallIntegerField(
         choices=ChildSex.choices,
-        default=ChildSex.MALE
+        default=ChildSex.MALE,
+        verbose_name="Пол ребенка",
     )
+    child_name = models.CharField(max_length=100, verbose_name="Имя ребенка", null=True, blank=True)
     birth_year = models.PositiveSmallIntegerField()
 
     class Meta:

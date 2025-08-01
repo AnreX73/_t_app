@@ -11,7 +11,7 @@ from datetime import timedelta
 
 
 from .forms import LoginUserForm, RegisterUserForm, UserPasswordResetForm, UserPasswordResetConfirmForm, CrateBidForm
-from .models import User, WorkerSchedule
+from .models import User, WorkerSchedule, AdditionalMaterials, AdultBid, ChildBid
 
 
 def index(request):
@@ -47,9 +47,13 @@ def profile(request):
 
         return render(request, "registration/worker_profile.html", context=context)
     else:
+        child_bids = ChildBid.objects.filter(customer=user)
+        adult_bids = AdultBid.objects.filter(customer=user)
+        all_bids_count = child_bids.count() + adult_bids.count()
         context = {
             "user": user,
             "title": "Profile",
+            "all_bids_count": all_bids_count
         }
 
         return render(request, "registration/profile.html", context=context)
