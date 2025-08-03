@@ -8,7 +8,6 @@ from .views import (
     profile,
     UserPasswordResetView,
     UserPasswordResetConfirmView,
-    user_profile,
     create_bid,
     
 )
@@ -50,5 +49,5 @@ urlpatterns += [
         ),
         name="password_reset_complete",
     ),
-    path("user_profile/<int:pk>", user_profile, name="user_profile"),
+    
 ]

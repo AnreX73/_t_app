@@ -7,13 +7,13 @@
             font-size: 1rem;
         }
         hr{
-            margin: 1rem auto;
-            width: 300px;
+            margin: 0.5rem auto;
+            width: 100px;
             border-bottom: #098BCC dotted 1px;
         }
         .user_main_info{
             margin-top: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom:0.5rem;
         }
         .user_image_box{
             border: 5px solid #c3eafcff;
@@ -59,7 +59,9 @@
             font-size: 1rem;
             background: radial-gradient(ellipse farthest-corner at center center, #FAFAFA 0%, #CFF4FF 100%);
             cursor: pointer;
-            justify-content: space-between;    
+            justify-content: space-between;
+            transition: 0.3s;
+            border: 1px solid #a0e0fdff;
         }
 
         .bid_info{
@@ -78,15 +80,18 @@
           position: relative;
           width: 240px;
           margin-inline: auto;
-          border-radius: 1rem;
+          border-radius: 8px;
           padding:1rem;
           font-size: 1.2rem;
           background: radial-gradient(ellipse farthest-corner at center center, #FAFAFA 0%, #CFF4FF 100%);
           cursor: pointer;
+          border: 1px solid #a0e0fdff;
+          transition: 0.3s;
         }
 
         .customer_button:hover, .customer_bids_info:hover{
           background: radial-gradient(ellipse farthest-corner at center center, #FAFAFA 0%, #bef0ffff 100%);
+
         }
         .offers_info{
           display: flex;
@@ -117,9 +122,9 @@
 <div class="user_image_box"><img  src="{{user.photo.url}}" alt="{{user.first_name}}"></div>
         
 {% elif user.sex == 1 %}
-        <div class="user_image_box"><img  src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="{{user.first_name}}"></div>
+        <div class="user_image_box"><img  src="{{alt_photo.image.url}}" alt="{{user.first_name}}"></div>
 {% else %}
-       <div class="user_image_box"> <img  src="https://cdn-icons-png.flaticon.com/512/149/149072.png" alt="{{user.first_name}}"></div>
+       <div class="user_image_box"> <img  src="{{alt_woman_photo.image.url}}" alt="{{user.first_name}}"></div>
 
 {% endif %}
 <p>{{user.first_name}}</p>
