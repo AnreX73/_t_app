@@ -77,8 +77,7 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
 @login_required(login_url="/register/")
 def profile(request):
     user = request.user
-    alt_photo = AdditionalMaterials.objects.filter(title="person").first()
-    alt_woman_photo = AdditionalMaterials.objects.filter(title="woman_person").first()
+
     if user.role == 1:
         users = User.objects.filter(role=2)
         context = {"user": user, "title": "Profile", "users": users}
@@ -98,9 +97,12 @@ def profile(request):
         context = {
             "user": user,
             "title": "Profile",
+            "child_bids": child_bids,
+            "adult_bids": adult_bids,
             "all_bids_count": all_bids_count,
-            "alt_photo": alt_photo,
-            "alt_woman_photo": alt_woman_photo,
+            "alt_photo": AdditionalMaterials.objects.filter(title="person").first(),
+            "alt_woman_photo": AdditionalMaterials.objects.filter(
+                title="woman_person").first(),
         }
 
         return render(request, "registration/profile.html", context=context)
