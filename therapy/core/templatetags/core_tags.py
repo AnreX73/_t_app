@@ -1,8 +1,7 @@
 from django import template
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from datetime import timedelta
-from datetime import date
+
 
 from core.models import *
 from core.utils import month_calendar

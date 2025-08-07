@@ -7,7 +7,7 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
-from .models import AdultBid
+from .models import Bid
 
 User = get_user_model()
 
@@ -103,8 +103,3 @@ class UserPasswordResetConfirmForm(SetPasswordForm):
     )
 
 
-class CrateBidForm(forms.ModelForm):
-    worker = forms.ModelChoiceField(queryset=User.objects.filter(role=User.Role.Worker), label="Специалист", widget=forms.Select(attrs={"class": "custom-select"}))
-    class Meta:
-        model = AdultBid
-        fields = ("worker", "date", "time", "customer_note")

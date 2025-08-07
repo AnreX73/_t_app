@@ -170,7 +170,7 @@
 </div>
 <div x-show="open" @click.outside="open = false" x-transition.duration.300ms class="customer_bids_wrapper">
     Мои записи
-    {% for bid in adult_bids %}
+    {% for bid in bids %}
     <div class="customer_bid_wrapper">
         <div class="customer_bid_item ">{{bid.customer.first_name}}</div>
         <div class="customer_bid_item">{{bid.date|date:"d.m"}}</div>
@@ -180,14 +180,7 @@
   
     {% endfor %}
    
-    {% for bid in child_bids %}
-    <div class="customer_bid_wrapper">
-        <div class="customer_bid_item child_bid_item">{{bid.child_name}}</div>
-        <div class="customer_bid_item child_bid_item">{{bid.date|date:"d.m"}}</div>
-        <div class="customer_bid_item child_bid_item">{{bid.time}}</div>
-        <div class="customer_bid_item child_bid_item">{{bid.worker.first_name}}</div>
-    </div>
-    {% endfor %}
+    
 </div>
 
 

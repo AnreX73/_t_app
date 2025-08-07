@@ -19,9 +19,8 @@ from .forms import (
     RegisterUserForm,
     UserPasswordResetForm,
     UserPasswordResetConfirmForm,
-    CrateBidForm,
 )
-from .models import User, WorkerSchedule, AdditionalMaterials, AdultBid, ChildBid
+from .models import User, Bid, AdditionalMaterials
 
 
 def index(request):
@@ -91,25 +90,18 @@ def profile(request):
 
         return render(request, "registration/worker_profile.html", context=context)
     else:
-        child_bids = ChildBid.objects.filter(customer=user)
-        adult_bids = AdultBid.objects.filter(customer=user)
-        all_bids_count = child_bids.count() + adult_bids.count()
+        bids = Bid.objects.filter(customer=user)
+
+        all_bids_count = bids.count()
         context = {
             "user": user,
             "title": "Profile",
-            "child_bids": child_bids,
-            "adult_bids": adult_bids,
+            "bids": bids,
             "all_bids_count": all_bids_count,
             "alt_photo": AdditionalMaterials.objects.filter(title="person").first(),
             "alt_woman_photo": AdditionalMaterials.objects.filter(
-                title="woman_person").first(),
+                title="woman_person"
+            ).first(),
         }
 
         return render(request, "registration/profile.html", context=context)
-
-
-@login_required
-def create_bid(request):
-    form = CrateBidForm
-    context = {"title": "Создание заявки", "form": form}
-    return render(request, "core/create_bid.html", context=context)

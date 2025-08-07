@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Abonements, User, WorkerSchedule, AdditionalMaterials, AdultBid, ChildBid, Abonements
+from .models import Abonements, User, WorkerSchedule, AdditionalMaterials,Abonements,Bid
 from django.utils.safestring import mark_safe
 
 
@@ -78,29 +78,18 @@ class AbonementsAdmin(admin.ModelAdmin):
         "price",
         "note",
     )
-
-
-@admin.register(AdultBid)
-class AdultBidAdmin(admin.ModelAdmin):
+@admin.register(Bid)
+class BidAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "worker",
-        "customer",
         "date",
         "time",
-        "status",
-    )
-    list_filter = ("worker","customer")
-
-
-@admin.register(ChildBid)
-class ChildBidAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "worker",
+        
         "customer",
-        "date",
-        "time",
-        "status",
+        "worker",
     )
-    list_filter = ("worker", "customer")
+
+
+
+
+

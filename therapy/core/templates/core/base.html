@@ -11,7 +11,7 @@
     <link type="text/css" rel="stylesheet" href="{% static 'core/css/main.css' %}" />
     {% block extra_css %}{% endblock extra_css %}
 </head>
-<body>
+<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
     
 <div class="all_content_wrapper">
 {% block content %}
