@@ -7,7 +7,7 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
-from .models import Bid
+from .models import Bid, WorkerSchedule
 
 User = get_user_model()
 
@@ -103,3 +103,29 @@ class UserPasswordResetConfirmForm(SetPasswordForm):
     )
 
 
+class WorkerScheduleCreateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["worker"].empty_label = ""
+    day_of_week = forms.ChoiceField(
+    choices=WorkerSchedule.DAYS_OF_WEEK,
+    widget=forms.RadioSelect(attrs={'class': 'radio-select'}),
+    required=True,
+    label="День недели",  # Django не добавит пустую опцию
+   )    
+    start_time = forms.TimeField(required=True, label="Время начала рабочего дня", widget=forms.TimeInput(attrs={"type": "time"}))
+    end_time = forms.TimeField(required=True, label="Время окончания", widget=forms.TimeInput(attrs={"type": "time"})) 
+    appointment_duration = forms.IntegerField(required=True, label="Длительность приема", widget=forms.NumberInput(attrs={"type": "number"}))
+    pre_entry_days = forms.IntegerField(required=True, label="Предварительный прием на(дней)", widget=forms.NumberInput(attrs={"type": "number"}))    
+    
+    class Meta:
+        model = WorkerSchedule
+        fields = (
+            "worker",
+            "day_of_week",
+            "start_time",
+            "end_time",
+            "appointment_duration",
+            "pre_entry_days",
+        )
+        

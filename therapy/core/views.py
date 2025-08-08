@@ -19,6 +19,7 @@ from .forms import (
     RegisterUserForm,
     UserPasswordResetForm,
     UserPasswordResetConfirmForm,
+    WorkerScheduleCreateForm,
 )
 from .models import User, Bid, AdditionalMaterials
 
@@ -105,3 +106,16 @@ def profile(request):
         }
 
         return render(request, "registration/profile.html", context=context)
+
+
+@login_required(login_url="/register/")
+def create_worker_schedule(request):
+    form = WorkerScheduleCreateForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect("profile")
+
+    context = {
+        "form": form,
+    }
+    return render(request, "core/create_worker_schedule.html", context=context)

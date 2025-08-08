@@ -1,15 +1,20 @@
 from django import template
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-
+import calendar
 
 from core.models import *
-from core.utils import month_calendar
+
+cl = calendar.Calendar(firstweekday=0)
+
+
+def month_calendar(year, month):
+    return cl.itermonthdates(year, month)
+
 
 today = timezone.now().date()
 YEAR = today.year
 MONTH = today.month
-
 
 register = template.Library()
 
@@ -47,4 +52,3 @@ def worker_calendar(worker_id=None, year=YEAR, month=MONTH):
             worker_calendar.append(day_info)
 
     return {"worker": worker, "worker_calendar": worker_calendar}
-

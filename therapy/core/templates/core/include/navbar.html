@@ -1,7 +1,7 @@
 <nav id='menu'>
   <input class='my_input' type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
   <ul>
-    <li><a href='{% url "profile" %}'>Расписание</a></li>
+    
     <!-- <li><a class='dropdown-arrow' href='http://'>Заявки</a>
       <ul class='sub-menus'>
         <li><a href='http://'>Новые</a></li>
@@ -14,6 +14,7 @@
 
 
     <li><a href='http://'>Добавить клиента</a></li>
+    <li><a href='{% url "create_worker_schedule" %}'>Добавить расписание</a></li>
     <li><a href='http://'>Статистика</a></li>
     <li style="cursor: pointer;color: white" onclick="location.href='{% url 'logout' %}'">Выйти</li>
     

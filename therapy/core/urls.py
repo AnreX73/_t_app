@@ -8,6 +8,7 @@ from .views import (
     profile,
     UserPasswordResetView,
     UserPasswordResetConfirmView,
+    create_worker_schedule,
     
     
 )
@@ -20,6 +21,8 @@ from django.contrib.auth.views import (
 
 urlpatterns = [
     path("", index, name="home"),
+    path("create_worker_schedule/", create_worker_schedule, name="create_worker_schedule"),
+
     
 ]
 

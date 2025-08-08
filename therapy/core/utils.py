@@ -82,3 +82,4 @@ def appoitment_slots(worker=None, pre_entry_days=30, day_of_week=3, start_time=(
 
 if __name__ == "__main__":
     appoitment_slots()
+appoitment_slots()
