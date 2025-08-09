@@ -14,7 +14,14 @@
 
 
     <li><a href='http://'>Добавить клиента</a></li>
-    <li><a href='{% url "create_worker_schedule" %}'>Добавить расписание</a></li>
+    <li><a  class='dropdown-arrow' href='{% url "create_worker_schedule" %}'>Править расписание</a>
+       <ul class='sub-menus'>
+        <li><a href='http://'>Egor</a></li>
+        <li><a href='http://'>Ludmila</a></li>
+        <li><a href='http://'>Edvard</a></li>
+
+      </ul>
+    </li>
     <li><a href='http://'>Статистика</a></li>
     <li style="cursor: pointer;color: white" onclick="location.href='{% url 'logout' %}'">Выйти</li>
     

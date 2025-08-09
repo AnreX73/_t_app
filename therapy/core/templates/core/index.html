@@ -27,11 +27,19 @@
 
     {% if user.is_authenticated %}
         {{ user }}
+        <button class="btn" onclick="location.href='{% url 'logout' %}'" >выход</button>
+    {% if user.role == 1 %}
+        <button class="btn" onclick="location.href='{% url 'profile' %}'" >админ панель</button>
     {% else %}
+        <button class="btn" onclick="location.href='{% url 'profile' %}'" >в профиль</button>
+    {% endif %}
+    {% else %}
+    
     <button class="btn" onclick="location.href='{% url 'login' %}'" >вход</button>
+    <div class="forgot_password" onclick="location.href='{% url 'register' %}'">не зарегестрированы ?</div>
     {% endif %}
 
 </div>
-<div class="forgot_password" onclick="location.href='{% url 'register' %}'">не зарегестрированы ?</div>
+
 
 {% endblock content %}

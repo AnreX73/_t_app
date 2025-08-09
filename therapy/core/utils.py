@@ -1,9 +1,17 @@
+
 from random import randint
 from datetime import datetime
 from datetime import time
 from datetime import timedelta
 
-today = datetime.now()
+
+today =datetime.now()
+
+
+
+
+
+
 
 
 def words_to_slug(words):
@@ -63,23 +71,22 @@ def words_to_slug(words):
     return slug
 
 
-def appoitment_slots(worker=None, pre_entry_days=30, day_of_week=3, start_time=(9, 0), end_time=(14, 0),
-                     appointment_duration=30):
+def appoitment_slots(worker=None, pre_entry_days=30, day_of_week= 3, start_time=(9, 0), end_time=(14, 0), appointment_duration=30):
     # woker = woker
-
+    
     for i in range(pre_entry_days):
 
         day = today + timedelta(days=i)
         if day.weekday() == day_of_week:
             h1, m1 = start_time
             h2, m2 = end_time
-            s_time = datetime(day.year, day.month, day.day, h1, m1)
-            e_time = datetime(day.year, day.month, day.day, h2, m2)
+            s_time = datetime(day.year,day.month, day.day, h1, m1 )
+            e_time = datetime(day.year,day.month, day.day, h2, m2 )
             while s_time < e_time:
                 print(s_time)
                 s_time += timedelta(minutes=appointment_duration)
-
-
+                
+               
+                  
 if __name__ == "__main__":
     appoitment_slots()
-appoitment_slots()
