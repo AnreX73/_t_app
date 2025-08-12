@@ -80,7 +80,8 @@ def profile(request):
 
     if user.role == 1:
         users = User.objects.filter(role=2)
-        context = {"user": user, "title": "Profile", "users": users}
+        bids = Bid.objects.all().order_by("date", "time")
+        context = {"user": user, "title": "Profile", "users": users, "bids": bids}
 
         return render(request, "registration/admin_profile.html", context=context)
     elif user.role == 2:

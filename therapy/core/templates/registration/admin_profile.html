@@ -21,7 +21,7 @@
         }
         
         .menu_button{
-           
+            box-shadow: 3px 3px 2px 0px rgba(201, 201, 201, 1);
             width: 100px;
             height: 100px;
             display: flex; 
@@ -34,6 +34,7 @@
             font-size: 1rem;
             background: radial-gradient(ellipse farthest-corner at center center, #FAFAFA 20%, #CFF4FF 100%);
             cursor: pointer;
+            transition: 0.3s;
               
         }
         
@@ -44,11 +45,14 @@
             
         }
         .menu_button_stat{
-            align-self: center;
+            align-items: center;
+            justify-content: center;
         }
       
         .menu_button:hover{
             background: radial-gradient(ellipse farthest-corner at center center, #FAFAFA 20%, #a7eaffff 100%);
+            box-shadow: 5px 5px 3px 0px rgba(201, 201, 201, 1);
+            transition: 0.3s;
         }
         .wokers_schedule_wrapper {
             margin: 1rem auto;
@@ -63,19 +67,65 @@
             display: flex;
             flex-direction: column;
         }
+        .schedule_wrapper{
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;    
+        }
+        .coach_schedule_wrapper{
+            height: 330px;
+            border: 1px solid #a0e0fdff;
+            border-radius: 8px;
+            padding:1rem;
+            padding-top: 0rem;
+            font-size: 1.2rem;
+            width: 100%;
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto; 
+            box-shadow: 3px 3px 2px 0px rgba(201, 201, 201, 1);  
+        }
+        .coach_name_box{
+            padding: 0.5rem;
+            position: sticky;
+            top: 0;
+            background-color:  #ffffffff ;
+            border-bottom: 1px solid #a0e0fdff;
+        }
+        .customer_bid_wrapper{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            justify-content: space-around;
+            width: 100%;
+            gap: 1rem;
+            border-bottom: 1px solid #a0e0fdff;
+            padding-bottom: 0.5rem;
+            padding-top: 0.5rem;
+            font-size: 1rem;
+        }
+        .customer_bid_item:first-child{
+            
+            justify-self: flex-start;
+            
+        }
+        .customer_bid_item:last-child{
+            justify-self: flex-end;
+            
+        }
+
     </style>
 {% endblock extra_css %}
 
 
 {% block content %}
 
-{% include 'core/include/navbar.html' %}
-
-
-
     <h2>Администрирование</h2>
-    <h4 style="margin-top: 1rem;"> {{user}}</h4>
-    <hr>
+    <h4 style="margin-top: 1rem;margin-bottom: 0.5rem;"> {{user}}</h4>
+    {% if user.photo %}
+        <img style="width: 75px; margin: 0 auto; border-radius: 50%;border: 3px solid #c3eafcff;" src="{{user.photo.url}}" alt="{{user.first_name}}">
+    {% endif %}
+
 <div class="admin_panel_wrapper">
     <div class="menu_buttons_wrapper">
         <div class="menu_button">
@@ -95,20 +145,39 @@
             <div>тренеров: 3</div>       
         </div>
         <div class="menu_button menu_button_stat">статистика</div>
-        <a  href="{% url 'logout' %}" class="menu_button">выйти из админки</a>
+        <a  href="{% url 'logout' %}" class="menu_button menu_button_stat">выйти из админки</a>
     </div>
         
+   <div class="schedule_wrapper">
+    {% for u in users %}
+        <div class="coach_schedule_wrapper">
+            <div  class="coach_name_box">{{u.first_name}} {{ u.last_name}}</div> 
+            {% for bid in bids %}
+                {% if bid.worker == u %}
+                <div class="customer_bid_wrapper">
+                    <div class="customer_bid_item">{{bid.customer.first_name}}</div>
+                    {% if bid.is_child_bid %}
+                    <div class="customer_bid_item">детская</div>
+                    {% else %}
+                    <div class="customer_bid_item"></div>
+                    {% endif %}
+                    <div class="customer_bid_item">{{bid.date|date:"d.m"}}</div>
+                    <div class="customer_bid_item">{{bid.time}}</div>
+                    
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
    
+    {% endfor %}
+   </div>
    
-</div>
+
  
 
 
 
-{% if user.photo %}
-        <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">
 
-{% endif %}
 
 
 
