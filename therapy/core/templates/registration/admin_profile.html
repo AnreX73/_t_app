@@ -4,8 +4,51 @@
     <!-- Стили только для этой страницы -->
     
     <style>
-        .special_h3 {
+        .admin_panel_wrapper{
             margin-top: 1rem;
+            display:grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .menu_buttons_wrapper{
+            margin: 1rem auto;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;   
+        }
+        
+        .menu_button{
+           
+            width: 100px;
+            height: 100px;
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            border: 1px solid #a0e0fdff;
+            border-radius: 8px;
+            padding:0.5rem;
+            font-size: 1rem;
+            background: radial-gradient(ellipse farthest-corner at center center, #FAFAFA 20%, #CFF4FF 100%);
+            cursor: pointer;
+              
+        }
+        
+        .menu_button div:last-child{
+            align-self: flex-end;
+            font-size: 0.9rem;
+            text-align: right;
+            
+        }
+        .menu_button_stat{
+            align-self: center;
+        }
+      
+        .menu_button:hover{
+            background: radial-gradient(ellipse farthest-corner at center center, #FAFAFA 20%, #a7eaffff 100%);
         }
         .wokers_schedule_wrapper {
             margin: 1rem auto;
@@ -28,9 +71,39 @@
 
 {% include 'core/include/navbar.html' %}
 
+
+
     <h2>Администрирование</h2>
+    <h4 style="margin-top: 1rem;"> {{user}}</h4>
     <hr>
-<h4> {{user}}</h4>
+<div class="admin_panel_wrapper">
+    <div class="menu_buttons_wrapper">
+        <div class="menu_button">
+            <div>записать клиента</div>
+            <div>записей: 35</div>       
+        </div>
+        <div class="menu_button">
+            <div>подтвердить заявку</div>
+            <div>новых заявок: 8</div>       
+        </div>
+        <div class="menu_button">
+            <div>добавить клиента</div>
+            <div>клиентов:105</div>       
+        </div>
+        <div class="menu_button">
+            <div>править расписание</div>
+            <div>тренеров: 3</div>       
+        </div>
+        <div class="menu_button menu_button_stat">статистика</div>
+        <a  href="{% url 'logout' %}" class="menu_button">выйти из админки</a>
+    </div>
+        
+   
+   
+</div>
+ 
+
+
 
 {% if user.photo %}
         <img style="max-width: 100px; margin: 0 auto;" src="{{user.photo.url}}" alt="{{user.first_name}}">
@@ -39,7 +112,7 @@
 
 
 
-<div class="wokers_schedule_wrapper">
+{% comment %} <div class="wokers_schedule_wrapper">
 {% for u in users %}
 {% if u.role != 1 %}
 
@@ -51,8 +124,8 @@
 
 {% endif %}
 {% endfor %}
+</div> {% endcomment %}
+
 </div>
-
-
 
 {% endblock content %}
